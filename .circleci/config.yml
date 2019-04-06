@@ -4,25 +4,29 @@ Java Maven CircleCI 2.0 configuration file
 #
 version: 2
 jobs:
-build:
-working_directory: ~/recipe
-docker:
+  build:
+    docker:
   # specify the version you desire here
   - image: circleci/openjdk:8-jdk
-steps:
-  - checkout
+
+    working_directory: ~/recipe
+    environment:
+      # Customize the JVM maximum heap limit
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+      - checkout
   # Download and cache dependencies
-  - restore_cache:
-key: recipe-{‌{ checksum "pom.xml" }}
+      - restore_cache:
+          keys:
+            recipe-{‌{ checksum "pom.xml" }}
        - run: mvn install -DskipTests
        - run: mvn dependency:go-offline
+         -
        - save_cache:
-paths:
-  - ~/.m2
-key: spring5-recipe-app-{‌{ checksum "pom.xml" }}
+          paths:
+            - ~/.m2
+          key: spring5-recipe-app-{‌{ checksum "pom.xml" }}
   # run tests!
-  - run: mvn package
-  - store_test_results:
-path: target/surefire-reports
-        - store_artifacts:
-path: target/recipe-0.0.1-SNAPSHOT.jar
+       - run: mvn package
