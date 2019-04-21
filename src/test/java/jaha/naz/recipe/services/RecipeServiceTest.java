@@ -22,7 +22,7 @@ public class RecipeServiceTest {
     @Mock
     RecipeRepository recipeRepository;
 
-    @Mock
+    //@Mock
     RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Mock
