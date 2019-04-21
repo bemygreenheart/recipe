@@ -1,5 +1,7 @@
 package jaha.naz.recipe.services;
 
+import jaha.naz.recipe.converters.RecipeCommandToRecipe;
+import jaha.naz.recipe.converters.RecipeToRecipeCommand;
 import jaha.naz.recipe.domain.Recipe;
 import jaha.naz.recipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -19,12 +21,20 @@ public class RecipeServiceTest {
 
     @Mock
     RecipeRepository recipeRepository;
+
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     private RecipeService recipeService;
+
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService= new RecipeServiceImpl(recipeRepository);
+        recipeService= new RecipeServiceImpl(recipeRepository,recipeCommandToRecipe,recipeToRecipeCommand);
     }
 
     @Test
