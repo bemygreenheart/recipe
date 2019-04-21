@@ -25,7 +25,7 @@ public class RecipeServiceTest {
     @Mock
     RecipeToRecipeCommand recipeToRecipeCommand;
 
-    @Mock
+    //@Mock
     RecipeCommandToRecipe recipeCommandToRecipe;
 
     private RecipeService recipeService;
